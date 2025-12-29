@@ -4,3 +4,5 @@ export const AdminLayout = () => {
     <div>AdminLayout</div>
   )
 }
+
+export default AdminLayout;
