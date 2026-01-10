@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Link, useParams, useSearchParams } from "react-router";
 import { cn } from "@/lib/utils";
 import { CustomLogo } from "@/components/custom/CustomLogo";
+import { useAuthStore } from "@/auth/store/auth.store";
 
 export const CustomHeader = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const {user, logout} = useAuthStore();
   const {gender} = useParams(); 
 
 
@@ -85,11 +87,22 @@ export const CustomHeader = () => {
             </Button>
             
 
-            <Link to='/auth/login'>
-             <Button variant='default' size='sm' className="ml-2">
-              Login
-            </Button>
-            </Link>
+             {
+              !user ? (
+                <Link to='/auth/login'>
+                  <Button variant='default' size='sm' className="ml-2">
+                    Login
+                  </Button>
+                </Link>
+              ) : (
+                 
+                  <Button onClick={logout} variant='outline' size='sm' className="ml-2">
+                    Cerrar sesión
+                  </Button>
+              )
+             }
+
+          
 
             <Link to='/admin'>
              <Button variant='destructive' size='sm' className="ml-2">
