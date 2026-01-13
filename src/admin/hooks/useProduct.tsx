@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { getProductByIdAction } from "../actions/get-product-by-id.action"
+import type { Product } from "@/interfaces/product.interface"
 
 
 // Hook relacionado a un solo producto
@@ -14,9 +15,16 @@ export const useProduct = (id: string) => {
     })
 
     // TODO: mutación 
+    // const mutation = useMutation()
+    
+      // TODO: Por eliminar mas adelante
+      const handleSubmitForm = async(productLike: Partial<Product>) => {
+        console.log({productLike})
+      }
   
 
     return{
-        ...query
+        ...query,
+        handleSubmitForm,
     }
 }

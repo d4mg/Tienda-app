@@ -2,13 +2,9 @@
 
 import { Navigate, useParams } from 'react-router';
 
-import { useState } from 'react';
-import { X, Plus, Upload, Tag, SaveAll } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router';
 import { useProduct } from '@/admin/hooks/useProduct';
 import { CustomFullScreenLoading } from '@/components/custom/CustomFullScreenLoading';
-import { ProductForm } from './ui/productForm';
+import { ProductForm } from './ui/ProductForm';
 
 
 interface Product {
@@ -27,7 +23,7 @@ interface Product {
 export const AdminProductPage = () => {
   const { id } = useParams();
 
-  const {isLoading, isError,data: product } = useProduct(id || '');
+  const {isLoading, isError,data: product, handleSubmitForm } = useProduct(id || '');
   
 
   const title = id === 'new' ? 'Nuevo producto' : 'Editar producto';
@@ -35,6 +31,7 @@ export const AdminProductPage = () => {
     id === 'new'
       ? 'Aquí puedes crear un nuevo producto.'
       : 'Aquí puedes editar el producto.';
+
   
   // redirecciones
   if (isError){
@@ -53,5 +50,6 @@ export const AdminProductPage = () => {
   title={title}
   subTitle={subtitle}
   product={product}
+  onSubmit={handleSubmitForm  }
   />
 };
